@@ -17,25 +17,33 @@ const run = async () => {
     try {
         const packagesData = client.db("travelWebsite").collection("packageCollections");
         const islandsData = client.db("travelWebsite").collection("islandsCollections");
+        const totalClients = client.db("travelWebsite").collection("clientsCollections");
 
         // get packages data from database.
-        app.get('/packages', async(req, res)=>{
+        app.get('/packages', async (req, res) => {
             const query = {};
             const result = await packagesData.find(query).toArray();
-            res.send(result);  
+            res.send(result);
         })
 
         // get islands data from database.
-        app.get('/allIslands', async (req, res)=>{
+        app.get('/allIslands', async (req, res) => {
             const query = {};
             const result = await islandsData.find(query).toArray();
             res.send(result);
         })
 
-    } 
+        // get clients data from database.
+        app.get('/allclients', async (req, res) => {
+            const query = {};
+            const result = await totalClients.find(query).toArray();
+            res.send(result)
+        })
+
+    }
     catch {
 
-    } 
+    }
     finally {
 
     }
