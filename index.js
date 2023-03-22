@@ -16,7 +16,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const run = async () => {
     try {
         const packagesData = client.db("travelWebsite").collection("packageCollections");
-        
+        const islandsData = client.db("travelWebsite").collection("islandsCollections");
+
         // get packages data from database.
         app.get('/packages', async(req, res)=>{
             const query = {};
@@ -24,17 +25,23 @@ const run = async () => {
             res.send(result);  
         })
 
-    } catch {
+        // get islands data from database.
+        app.get('/allIslands', async (req, res)=>{
+            const query = {};
+            const result = await islandsData.find(query).toArray();
+            res.send(result);
+        })
 
-    } finally {
+    } 
+    catch {
+
+    } 
+    finally {
 
     }
 }
 
 run().then(error => console.log(error))
-
-
-
 
 
 
